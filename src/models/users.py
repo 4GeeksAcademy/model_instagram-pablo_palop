@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy import String, Boolean, DateTime, func, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import db, Post, Comment
+from models import db, Post, Comment, Follower
 
 
 class User(db.Model):
@@ -16,3 +16,21 @@ class User(db.Model):
 
     posts: Mapped[List["Post"]] = relationship("Post", back_populates="users")
     comments: Mapped[List["Comment"]] = relationship("Comment", back_populates="users")
+    following_assoc: Mapped[List["Follower"]] = relationship(
+        back_populates="user_from",
+        foreign_keys="[Follower.user_from_id]",
+        cascade="all, delete-orphan"
+    )
+    followers_assoc: Mapped[List["Follower"]] = relationship(
+        back_populates="user_to",
+        foreign_keys="[Follower.user_to_id]",
+        cascade="all, delete-orphan"
+    )
+    following: Mapped[List["User"]] = relationship(
+        "User",
+        secondary="followers",
+        primaryjoin="User.id==Follower.user_from_id",
+        secondaryjoin="User.id==Follower.user_to_id",
+        backref="followers",
+        overlaps="following_assoc,followers_assoc"
+    )
