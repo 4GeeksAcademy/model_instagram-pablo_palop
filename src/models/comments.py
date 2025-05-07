@@ -1,7 +1,10 @@
-from typing import List
+from typing import List, TYPE_CHECKING
 from sqlalchemy import String, DateTime, func, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import User, Post, db
+from models import db
+
+if TYPE_CHECKING:
+    from models import User, Post
 
 class Comment(db.Model):
     __tablename__ = "comments"

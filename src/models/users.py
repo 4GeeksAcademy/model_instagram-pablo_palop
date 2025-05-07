@@ -1,7 +1,10 @@
-from typing import List
-from sqlalchemy import String, Boolean, DateTime, func, ForeignKey
+from typing import List, TYPE_CHECKING
+from sqlalchemy import String, Boolean, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import db, Post, Comment, Follower
+from models import db
+
+if TYPE_CHECKING:
+    from models import Post, Comment, Follower
 
 
 class User(db.Model):
