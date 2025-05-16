@@ -1,7 +1,7 @@
 from typing import List, TYPE_CHECKING
 from sqlalchemy import String, Boolean, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import db
+from .database import db
 
 if TYPE_CHECKING:
     from models import Post, Comment, Follower

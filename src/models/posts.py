@@ -1,7 +1,7 @@
 from typing import List, TYPE_CHECKING
 from sqlalchemy import DateTime, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import db
+from sqlalchemy.orm import Mapped, mapped_column, relationship, ForeignKey
+from .database import db
 
 
 if TYPE_CHECKING:
@@ -15,3 +15,4 @@ class Post(db.Model):
 
     author_id: Mapped[List["User"]] = relationship("User", back_populates="posts")
     media_id: Mapped[List["Media"]] = relationship("Media", back_populates="posts")
+    author: Mapped["User"] = mapped_column(ForeignKey("users.id"), nullable=False)

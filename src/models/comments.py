@@ -1,7 +1,7 @@
 from typing import List, TYPE_CHECKING
 from sqlalchemy import String, DateTime, func, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models import db
+from .database import db
 
 if TYPE_CHECKING:
     from models import User, Post
@@ -15,5 +15,5 @@ class Comment(db.Model):
     author_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     post_id: Mapped[int] = mapped_column(ForeignKey("posts.id"), nullable=False)
 
-    author: Mapped[List["User"]] = relationship("User", back_populates="comments")
-    post: Mapped[List["Post"]] = relationship("Post", back_populates="comments")
+    author: Mapped["User"] = relationship("User", back_populates="comments")
+    post: Mapped["Post"] = relationship("Post", back_populates="comments")
