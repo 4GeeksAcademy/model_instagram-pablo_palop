@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .database import db
 
 if TYPE_CHECKING:
-    from models import User
+    from .users import User
 
 
 class Follower(db.Model):

@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .database import db
 
 if TYPE_CHECKING:
-    from models import Post
+    from .posts import Post
 
 media_type = Enum("media_type", "image", "video", "audio")
 

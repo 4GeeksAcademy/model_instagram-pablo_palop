@@ -1,11 +1,12 @@
 from typing import List, TYPE_CHECKING
-from sqlalchemy import DateTime, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship, ForeignKey
+from sqlalchemy import DateTime, func, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .database import db
 
 
 if TYPE_CHECKING:
-    from models import User, Media
+    from .users import User
+    from .medias import Media
 
 class Post(db.Model):
     __tablename__ = "posts"

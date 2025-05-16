@@ -4,7 +4,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .database import db
 
 if TYPE_CHECKING:
-    from models import User, Post
+    from .users import User
+    from .posts import Post
 
 class Comment(db.Model):
     __tablename__ = "comments"
