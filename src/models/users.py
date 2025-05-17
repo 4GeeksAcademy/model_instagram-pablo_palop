@@ -19,8 +19,8 @@ class User(db.Model):
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    posts: Mapped[List["Post"]] = relationship("Post", back_populates="users")
-    comments: Mapped[List["Comment"]] = relationship("Comment", back_populates="users")
+    posts: Mapped[List["Post"]] = relationship("Post", back_populates="author")
+    comments: Mapped[List["Comment"]] = relationship("Comment", back_populates="author")
     following_assoc: Mapped[List["Follower"]] = relationship(
         back_populates="user_from",
         foreign_keys="[Follower.user_from_id]",
